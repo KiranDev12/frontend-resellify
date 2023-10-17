@@ -1,0 +1,10 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.navbar>img {
+    height: 50px;
+    /* filter: grayscale(100%) invert(100%); */
+}
