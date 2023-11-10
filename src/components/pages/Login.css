@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* styles.css */
+
+.custom-opacity {
+  opacity: 0.5; /* Set the opacity value between 0 (fully transparent) and 1 (fully opaque) */
+}
