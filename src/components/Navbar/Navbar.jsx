@@ -38,7 +38,7 @@ function Navbar() {
           <NavLink to="/aboutus">About Us</NavLink>
         </li>
         <div className="login-btn">
-          <NavLink to="/login-signup">Login</NavLink>
+          <NavLink to="/signin">Login</NavLink>
         </div>
       </ul>
     </nav>
