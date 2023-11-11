@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Signin.css";
 import loginImg from "../../assets/login-img.jpg";
 import { NavLink } from "react-router-dom";
+import hero from "../../assets/hero.jpg";
 function Signup() {
   const [isMerchant, setIsMerchant] = useState(false);
   const [merchantCode, setMerchantCode] = useState("");
@@ -19,11 +20,11 @@ function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center bg-gray-800 h-screen overflow-hidden">
+    <div className="flex items-center justify-center bg-white h-screen overflow-hidden">
       <div className="grid grid-cols-1 sm:grid-cols-2 w-full max-w-screen-xl">
         {/* Hide the image on screens with a width of 864 pixels and below */}
         <div className="hidden sm:block">
-          <img className="max-h-full object-cover" src={loginImg} alt="" />
+          <img className="max-h-full object-cover" src={hero} alt="" />
         </div>
         <div className="flex items-center justify-center">
           <form className="max-w-[400px] w-full bg-gray-900 p-8 px-8 rounded-lg">
