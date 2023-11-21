@@ -35,7 +35,10 @@ const Issues = () => {
           <h2 className="text-3xl font-bold mb-6">Submit an Issue</h2>
           <form onSubmit={handleSubmit} className="max-w-md">
             <div className="mb-4">
-              <label htmlFor="productId" className="block text-sm font-medium text-gray-600">
+              <label
+                htmlFor="productId"
+                className="block text-sm font-medium text-gray-600"
+              >
                 Product ID
               </label>
               <input
@@ -49,7 +52,10 @@ const Issues = () => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="issueDesc" className="block text-sm font-medium text-gray-600">
+              <label
+                htmlFor="issueDesc"
+                className="block text-sm font-medium text-gray-600"
+              >
                 Issue Description
               </label>
               <textarea
@@ -79,7 +85,8 @@ const Issues = () => {
           <ul className="list-disc pl-4">
             {submittedIssues.map((issue, index) => (
               <li key={index} className="mb-2">
-                <strong>Product ID:</strong> {issue.productId} - <strong>Issue:</strong> {issue.issueDesc}
+                <strong>Product ID:</strong> {issue.productId} -{" "}
+                <strong>Issue:</strong> {issue.issueDesc}
               </li>
             ))}
           </ul>
