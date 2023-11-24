@@ -1,28 +1,59 @@
 import React, { useState } from "react";
-import "./Signin.css";
-import loginImg from "../../assets/login-img.jpg";
 import { NavLink } from "react-router-dom";
 import hero from "../../assets/hero.jpg";
+
 function Signup() {
-  const [isMerchant, setIsMerchant] = useState(false);
-  const [merchantCode, setMerchantCode] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
+    isMerchant: false,
+    merchantCode: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleCheckboxChange = () => {
+    setFormData({
+      ...formData,
+      isMerchant: !formData.isMerchant,
+    });
+  };
 
   const handleSignup = () => {
-    // Implement signup logic here, including handling the merchantCode
     console.log("Signup clicked");
-    console.log("Name:", name);
-    console.log("Phone Number:", phoneNumber);
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("Repeat Password:", repeatPassword);
-    console.log("Is Merchant:", isMerchant);
-    console.log("Merchant Code:", merchantCode);
+    console.log("Form Data:", formData);
+
+    fetch("YOUR_DJANGO_API_ENDPOINT", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("API Response:", data);
+        // Handle success or error response from the API
+        // For example, redirect to login page on successful signup
+      })
+      .catch((error) => {
+        console.error("Error sending signup request:", error);
+        // Handle error
+      });
   };
 
   return (
     <div className="flex items-center justify-center bg-white h-screen overflow-hidden">
       <div className="grid grid-cols-1 sm:grid-cols-2 w-full max-w-screen-xl">
-        {/* Hide the image on screens with a width of 864 pixels and below */}
         <div className="hidden sm:block">
           <img className="max-h-full object-cover" src={hero} alt="" />
         </div>
@@ -35,6 +66,9 @@ function Signup() {
               <label className="text-white font-light">Name</label>
               <input
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
                 className="w-full bg-gray-800 border-b border-white text-white"
               />
             </div>
@@ -42,6 +76,9 @@ function Signup() {
               <label className="text-white font-light">Phone Number</label>
               <input
                 type="text"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleInputChange}
                 className="w-full bg-gray-800 border-b border-white text-white"
               />
             </div>
@@ -49,6 +86,9 @@ function Signup() {
               <label className="text-white font-light">Email</label>
               <input
                 type="text"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
                 className="w-full bg-gray-800 border-b border-white text-white"
               />
             </div>
@@ -56,6 +96,9 @@ function Signup() {
               <label className="text-white font-light">Password</label>
               <input
                 type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
                 className="w-full bg-gray-800 border-b border-white text-white"
               />
             </div>
@@ -63,6 +106,9 @@ function Signup() {
               <label className="text-white font-light">Repeat Password</label>
               <input
                 type="password"
+                name="repeatPassword"
+                value={formData.repeatPassword}
+                onChange={handleInputChange}
                 className="w-full bg-gray-800 border-b border-white text-white"
               />
             </div>
@@ -75,7 +121,7 @@ function Signup() {
                   type="checkbox"
                   id="merchantCheckbox"
                   className="hidden"
-                  onChange={() => setIsMerchant(!isMerchant)}
+                  onChange={handleCheckboxChange}
                 />
                 <label
                   htmlFor="merchantCheckbox"
@@ -84,7 +130,9 @@ function Signup() {
                   <span className="relative inline-block w-8 h-4 transition duration-200 ease-in-out bg-gray-600 border-2 border-white rounded-full">
                     <span
                       className={`absolute inline-block w-3 h-3 transition duration-200 ease-in-out transform translate-x-0 ${
-                        isMerchant ? "translate-x-full bg-blue-500" : "bg-white"
+                        formData.isMerchant
+                          ? "translate-x-full bg-blue-500"
+                          : "bg-white"
                       } rounded-full`}
                     />
                   </span>
@@ -92,13 +140,14 @@ function Signup() {
                 </label>
               </div>
             </div>
-            {isMerchant && (
+            {formData.isMerchant && (
               <div className="mb-4">
                 <label className="text-white font-light">Merchant Code</label>
                 <input
                   type="text"
-                  value={merchantCode}
-                  onChange={(e) => setMerchantCode(e.target.value)}
+                  name="merchantCode"
+                  value={formData.merchantCode}
+                  onChange={handleInputChange}
                   className="w-full bg-gray-800 border-b border-white text-white"
                 />
               </div>

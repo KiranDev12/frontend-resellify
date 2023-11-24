@@ -9,7 +9,7 @@ function ProductCard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/fetch/products/")
+    fetch("http://127.0.0.1:8080/fetch/products/")
       .then((response) => response.json())
       .then((data) => {
         setData(data);
@@ -42,7 +42,7 @@ function ProductCard() {
                     <span style={{ color: "orange" }}>$</span>
                     <span>{card.product_price}</span>
                   </span>
-                  <span className="primaryText">{card.product_name}</span>
+                  <span className="3xl">{card.product_name}</span>
                   <div className="span secondaryText">{card.product_rating}</div>
                   
                 </div>

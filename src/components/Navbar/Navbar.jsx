@@ -2,15 +2,23 @@ import React, { useState } from "react";
 import logo from "../../assets/logo.png";
 import hamburgerMenu from "../../assets/hamburgerMenu.svg";
 import close from "../../assets/close.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+// import {SvgIcon} from "@mui/material/SvgIcon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// Import Font Awesome styles
+import '@fortawesome/fontawesome-free/css/all.css';
 
-const Navbar = () => {
+const Navbar = ({ loggedInCustomer }  ) => {
   const [toggle, setToggle] = useState(false);
 
   const handleHover = {
     borderBottom: "2px solid #20B486", // Change color as per your design
   };
-
+  const Navigate = useNavigate();
+  const handleProfileClick = () => {
+    // Navigate to the UserProfile component
+    Navigate("/profile");
+  };
   return (
     <div className="w-full h-[80px] bg-white border-b">
       <div className="md:max-w-[1480px] max-w-[600px] m-auto w-full h-full flex justify-between items-center md:px-0 px-4">
@@ -44,9 +52,23 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex">
-          <button className="px-8 py-3 rounded-md bg-[#20B486] text-white font-bold ">
-            <NavLink to="/signin">Login/Signup</NavLink>
-          </button>
+          {loggedInCustomer ? (
+            // Display the customer's name and SvgIcon if logged in
+            <>
+              <p className="font-bold mr-2">{`${loggedInCustomer.customerName}`}</p>
+              <FontAwesomeIcon
+                icon={["far", "user"]}
+                className="mr-1"
+                onClick={handleProfileClick}
+                style={{ cursor: "pointer" }}
+              />
+            </>
+          ) : (
+            // Display the login/signup button if not logged in
+            <button className="px-8 py-3 rounded-md bg-[#20B486] text-white font-bold">
+              <NavLink to="/signin">Login/Signup</NavLink>
+            </button>
+          )}
         </div>
 
         <div className="md:hidden" onClick={() => setToggle(!toggle)}>
@@ -92,9 +114,18 @@ const Navbar = () => {
           </div>
 
           <li className="w-full text-center">
-            <button className="px-8 py-3 rounded-md bg-[#20B486] text-white font-bold ">
+  
+          {loggedInCustomer ? (
+            // Display the customer's name and SvgIcon if logged in
+            <>
+              <p className="font-bold">{`${loggedInCustomer.customerName}`}</p>
+            </>
+          ) : (
+            // Display the login/signup button if not logged in
+            <button className="px-8 py-3 rounded-md bg-[#20B486] text-white font-bold">
               <NavLink to="/signin">Login/Signup</NavLink>
             </button>
+          )}
           </li>
         </ul>
       </div>
