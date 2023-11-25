@@ -32,7 +32,7 @@ function Signup() {
     console.log("Signup clicked");
     console.log("Form Data:", formData);
 
-    fetch("YOUR_DJANGO_API_ENDPOINT", {
+    fetch("http://127.0.0.1:8080/receive/register/  ", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

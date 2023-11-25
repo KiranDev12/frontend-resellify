@@ -7,8 +7,9 @@ import Products from "./components/pages/Products";
 import Orders from "./components/pages/Orders";
 import Signin from "./components/pages/Signin";
 import Signup from "./components/pages/Signup";
-import Navbar from "./components/Navbar/Navbar";  // Import Navbar
+import Navbar from "./components/Navbar/Navbar"; // Import Navbar
 import UserProfile from "./components/pages/UserProfile";
+import AddProduct from "./components/AddProduct/AddProduct";
 function App() {
   const location = useLocation();
   const isLoginPage = location.pathname === "/signin";
@@ -22,7 +23,9 @@ function App() {
 
   return (
     <div>
-      {!(isLoginPage || isSignupPage) && <Navbar loggedInCustomer={loggedInCustomer} />}
+      {!(isLoginPage || isSignupPage) && (
+        <Navbar loggedInCustomer={loggedInCustomer} />
+      )}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -30,18 +33,13 @@ function App() {
         <Route path="/issues" element={<Issues />} />
         <Route path="/products" element={<Products />} />
         <Route path="/orders" element={<Orders />} />
-        <Route
-          path="/signin"
-          element={<Signin onLogin={handleLogin} />}
-        />
-        <Route
-          path="/signup"
-          element={<Signup />}
-        />
+        <Route path="/signin" element={<Signin onLogin={handleLogin} />} />
+        <Route path="/signup" element={<Signup />} />
         <Route
           path="/profile"
           element={<UserProfile loggedInCustomer={loggedInCustomer} />}
         />
+        <Route path="/addproduct" element={<AddProduct />} />
       </Routes>
     </div>
   );

@@ -4,6 +4,8 @@ import "swiper/css";
 import "./ProductCard.css";
 import { sliderSettings } from "../../utils/common";
 import loginImg from "../../assets/login-img.jpg";
+import { FaStar } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function ProductCard() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,6 +45,7 @@ function ProductCard() {
                     <span>{card.product_price}</span>
                   </span>
                   <span className="3xl">{card.product_name}</span>
+                  
                   <div className="span secondaryText">{card.product_rating}</div>
                   
                 </div>
