@@ -1,11 +1,15 @@
+// ProductCard.jsx
+
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
+import { FaStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import ProductDetailPage from "./ProductDetailPage";
+import login from "../../assets/login-img.jpg";
 import "./ProductCard.css";
 import { sliderSettings } from "../../utils/common";
-import loginImg from "../../assets/login-img.jpg";
-import { FaStar } from "react-icons/fa";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 function ProductCard() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,13 +19,13 @@ function ProductCard() {
       .then((response) => response.json())
       .then((data) => {
         setData(data);
-        setLoading(false); // Set loading to false when data is available
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
-        setLoading(false); // Set loading to false in case of an error
+        setLoading(false);
       });
-  }, []); // The empty dependency array ensures the effect runs only once after the initial render.
+  }, []);
 
   return (
     <section className="r-wrapper">
@@ -31,23 +35,55 @@ function ProductCard() {
           <span className="primaryText">Popular Products</span>
         </div>
         {loading ? (
-          // Display a loading message while data is being fetched
           <p>Loading...</p>
         ) : (
           <Swiper {...sliderSettings}>
             <SliderButtons />
-            {data.map((card, i) => (
+            {data.map((product, i) => (
               <SwiperSlide key={i}>
-                <div className="flexColStart r-card">
-                  <img src={loginImg} alt="" />
-                  <span className="secondaryText r-price">
-                    <span style={{ color: "orange" }}>$</span>
-                    <span>{card.product_price}</span>
+                <div className={`flexColStart r-card flex-column`}>
+                  <img
+                    className="mb-2"
+                    src={login}
+                    alt={product.product_name}
+                  />
+                  <span className="product-name text-gray-800">
+                    {product.product_name}
                   </span>
-                  <span className="3xl">{card.product_name}</span>
-                  
-                  <div className="span secondaryText">{card.product_rating}</div>
-                  
+
+                  <div
+                    className={`category-name category-${
+                      product.category_id % 7
+                    }`}
+                  >
+                    {product.category_name}
+                  </div>
+                  <div className="price-rating-container">
+                    <div className="price-container">
+                      <span className="black font-thin text-sm r-price">
+                        <span style={{ color: "black" }} className="pr-1">
+                          $
+                        </span>
+                        {product.product_price}
+                      </span>
+                    </div>
+                    <div className="rating-container">
+                      <p className="secondaryText rating-container">
+                        <FaStar
+                          className="starIcon text-yellow-500"
+                          style={{ WebkitTextStroke: "1px black" }}
+                        />
+                        <span className="black">{product.product_rating}</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <Link
+                  className="text-sm text-gray-700"
+                    to={`/products/${product.product_id}`}
+                  >
+                    See More
+                  </Link>
                 </div>
               </SwiperSlide>
             ))}

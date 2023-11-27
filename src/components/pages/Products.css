@@ -79,3 +79,16 @@
 .r-button > :nth-child(2) {
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.24);
 }
+
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 5fr));
+  gap: 10px;
+}
+
+.product-list-container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0px;
+}

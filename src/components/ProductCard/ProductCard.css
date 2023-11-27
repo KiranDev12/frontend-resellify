@@ -1,3 +1,9 @@
+/* ProductCard.css */
+
+.r-wrapper {
+  /* Add styles as needed */
+}
+
 .r-container {
   position: relative;
   overflow: hidden;
@@ -8,42 +14,133 @@
 }
 
 .r-card {
-  gap: 0.6rem;
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
   border-radius: 10px;
-  max-width: max-content;
-  margin: auto;
   transition: all 300ms ease-in;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
-
-.r-card > img {
-  width: 100%;
-  max-width: 15rem;
-}
-
-.r-card > :nth-child(2) {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.r-card > :nth-child(3) {
-  font-size: 1.5rem;
-}
-
-.r-card > :nth-child(4) {
+.category-name {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
   font-size: 0.7rem;
-  width: 15rem;
+  text-align: center;
 }
 
 .r-card:hover {
-  scale: 1.025;
+  transform: scale(1.025);
   cursor: pointer;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(135, 160, 255, 0.46) 215%
-  );
-  box-shadow: 0px 72px 49px -51px rgba(136, 160, 255, 0.21);
+}
+
+.r-card img {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.product-name {
+  white-space: nowrap; /* Prevent line breaks */
+  overflow: hidden; /* Hide overflowing content */
+  text-overflow: ellipsis; /* Show an ellipsis (...) when content overflows */
+}
+
+.category-0 {
+  background-color: #FFC0CB; /* Light Pink */
+}
+
+.category-1 {
+  background-color: #87CEEB; /* Sky Blue */
+}
+
+.category-2 {
+  background-color: #98FB98; /* Pale Green */
+}
+
+.category-3 {
+  background-color: #FFD700; /* Gold */
+}
+
+.category-4 {
+  background-color: #FFA07A; /* Light Salmon */
+}
+
+.category-5 {
+  background-color: #DDA0DD; /* Plum */
+}
+
+.category-6 {
+  background-color: #7FFFD4; /* Aquamarine */
+}
+.r-card {
+  position: relative;
+}
+
+.product-name::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px; /* Adjust the thickness of the underline */
+  background-color: transparent; /* Set the initial color of the underline */
+  transition: background-color 0.3s; /* Smooth transition effect */
+}
+
+.r-card:hover .product-name::before {
+  background-color: #e0835e; 
+}
+
+.price-rating-container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.secondaryText.r-price {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.secondaryText.rating-container {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #333;
+}
+
+.starIcon {
+  margin-right: 0.2rem;
+  color: #FFD700;
+}
+
+.text-gray-800 {
+  font-size: 0.9rem;
+  color: #555;
+  margin-right: 1rem;
+}
+
+.buyNowButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 1rem;
+}
+
+.buyNowButton:hover {
+  background-color: #45a049;
 }
 
 .swiper-horizontal {
@@ -66,16 +163,14 @@
   background-color: white;
   cursor: pointer;
 }
+
 .r-button > button:hover {
   font-size: 1.42rem;
   transition: all ease-in;
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
-.r-button > :nth-child(1) {
-  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.24);
-}
-
+.r-button > :nth-child(1),
 .r-button > :nth-child(2) {
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.24);
 }

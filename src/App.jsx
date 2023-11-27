@@ -10,6 +10,8 @@ import Signup from "./components/pages/Signup";
 import Navbar from "./components/Navbar/Navbar"; // Import Navbar
 import UserProfile from "./components/pages/UserProfile";
 import AddProduct from "./components/AddProduct/AddProduct";
+import ProductCard from "./components/ProductCard/ProductCard";
+import ProductDetailPageRoute from "./components/ProductCard/ProductDetailPageRoute";
 function App() {
   const location = useLocation();
   const isLoginPage = location.pathname === "/signin";
@@ -28,6 +30,10 @@ function App() {
       )}
 
       <Routes>
+        <Route
+          path="/products/:productId"
+          element={<ProductDetailPageRoute />}
+        />
         <Route path="/" element={<Home />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/issues" element={<Issues />} />
