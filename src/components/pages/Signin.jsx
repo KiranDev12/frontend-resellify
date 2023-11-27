@@ -1,32 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import hero from "../../assets/hero.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+
 function Signin(props) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const [customers, setCustomers] = useState([]);
-  const [merchants, setMerchants] = useState([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Fetch customer data when the component mounts
-    fetch("http://127.0.0.1:8080/fetch/customers/")
-      .then((response) => response.json())
-      .then((data) => setCustomers(data))
-      .catch((error) => console.error("Error fetching customer data:", error));
-
-    // Fetch merchant data when the component mounts
-    fetch("http://127.0.0.1:8080/fetch/merchants/")
-      .then((response) => response.json())
-      .then((data) => setMerchants(data))
-      .catch((error) => console.error("Error fetching merchant data:", error));
-  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -36,33 +21,43 @@ function Signin(props) {
     });
   };
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
-  
-    // Check in both customer and merchant data
-    const customer = customers.find(
-      (c) => c.customerMail ===formData.email && c.customerPwd === formData.password
-    );
-  
-    const merchant = merchants.find(
-      (m) => m.merchantMail === formData.email && m.merchantPwd === formData.password
-    );
-  
-    if (customer || merchant) {
+
+    try {
+      // Send a POST request to the server for authentication
+      const response = await fetch("http://127.0.0.1:8080/receive/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        // Authentication failed, show an error message
+        toast.error("Invalid Credentials");
+        return;
+      }
+
       // Authentication successful, you can redirect or perform other actions
-      props.onLogin(customer || merchant);
-      toast.success("Successful login")
+      const user = await response.json();
+      props.onLogin(user);
+      toast.success("Successful login");
       navigate("/");
-    } else {
-      // Authentication failed, show an error message
-      toast.error("Invalid Credentials");
+    } catch (error) {
+      console.error("Error during sign-in:", error);
+      toast.error("An error occurred during sign-in");
     }
   };
-  
 
   return (
     <div className="flex items-center justify-center bg-white h-screen overflow-hidden">
-      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+      />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 w-full max-w-screen-xl">
         {/* Hide the image on screens with a width of 864 pixels and below */}
