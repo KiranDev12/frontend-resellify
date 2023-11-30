@@ -13,3 +13,9 @@
 .right > img {
     height: 100%;
 }
+
+.hero-img {
+    transition-timing-function: ease-in;
+    transition-delay: 4s;
+
+}

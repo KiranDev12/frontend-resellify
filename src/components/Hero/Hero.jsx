@@ -63,7 +63,7 @@ const Hero = () => {
           </form>
         </div>
 
-        <img src={hero} className="md:order-last  order-first" />
+        <img src={hero} className="hero-img md:order-last  order-first" />
       </div>
     </div>
   );

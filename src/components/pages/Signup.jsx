@@ -25,7 +25,7 @@ function Signup() {
     setFormData({
       ...formData,
       isMerchant: !formData.isMerchant,
-    });
+    });                   
   };
 
   const handleSignup = () => {

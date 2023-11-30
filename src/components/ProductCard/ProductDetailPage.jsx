@@ -1,6 +1,8 @@
 import React from "react";
 import login from "../../assets/login-img.jpg";
-import './ProductDetailPage.css'
+import "./ProductDetailPage.css";
+import Review from "../Reviews/Reviews";
+
 function ProductDetailPage() {
   const productDetails = {
     product_id: 4134,
@@ -18,31 +20,41 @@ function ProductDetailPage() {
   };
 
   return (
-    <div className="flex flex-row w-full h-max justify-around">
-      <div className="left mt-10">
-        <img src={login} alt="Product" className="h-auto max-w-md rounded-lg" />
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div className="flex justify-around">
+        <img
+          src={login}
+          alt="Product"
+          className="w-auto h-auto max-h-96 rounded-lg shadow-lg"
+        />
       </div>
-      <div className="right p-4 mt-10">
-        <h2 className="text-5xl font-bold mb-4">
+      <div className="m-10 h-fit max-h-fit p-4 md:p-8 bg-white rounded-lg shadow-lg">
+        <h2 className="text-3xl md:text-5xl font-bold mb-4">
           {productDetails.product_name}
         </h2>
-        <p className="text-xl text-gray-600 mb-4">{productDetails.product_desc}</p>
-        <div className={`category-name`}>
-          {productDetails.category_name}
+        <p className="text-lg text-gray-600 mb-4">
+          {productDetails.product_desc}
+        </p>
+        <div className="text-gray-700 font-semibold mb-4">
+          Category: {productDetails.category_name}
         </div>
-        <p className="text-gray-600 mb-4">
+        <p className="text-gray-700 mb-4">
           Rating: {productDetails.product_rating}
         </p>
-        <p className="text-gray-600 mb-4">
+        <p className="text-gray-700 mb-4">
           Price: Rs {productDetails.product_price}
         </p>
-        <p className="text-gray-600 mb-4">
+        <p className="text-gray-700 mb-4">
           Life: {productDetails.product_life} years
         </p>
-        <p className="text-gray-600 mb-4">
+        <p className="text-gray-700 mb-4">
           Release Date: {productDetails.product_date}
         </p>
         {/* Add more details as needed */}
+        <button className="bg-[#20B486] text-white py-2 px-4 rounded-full shadow-md hover:bg-green-600 transition duration-300">
+          Add to Cart
+        </button>
+        <Review />
       </div>
     </div>
   );
