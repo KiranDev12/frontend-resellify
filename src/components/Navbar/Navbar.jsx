@@ -8,22 +8,54 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Import Font Awesome styles
 import "@fortawesome/fontawesome-free/css/all.css";
 import AddProduct from "../AddProduct/AddProduct";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { user } from "fontawesome";
 
-const Navbar = ({ loggedInCustomer }) => {
+const Navbar = () => {
   const [toggle, setToggle] = useState(false);
+  const [loggedInCustomer, setLoggedInCustomer] = useState(null);
+  const navigate = useNavigate(); // Corrected from 'Navigate'
+  const location = useLocation();
 
   const handleHover = {
-    borderBottom: "2px solid #20B486", // Change color as per your design
+    borderBottom: "2px solid #20B486",
   };
-  const Navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user information is stored in local storage
+    const storedUser = localStorage.getItem("user");
+    console.log(storedUser);
+
+    const fetchCustomerDetails = async (customerId) => {
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:8080/fetch/customers/`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch customer details");
+        }
+        const customerDetails = await response.json();
+        setLoggedInCustomer(customerDetails);
+      } catch (error) {
+        console.error("Error fetching customer details:", error);
+      }
+    };
+
+    if (storedUser) {
+      const userObject = JSON.parse(storedUser);
+      const { customerid } = userObject;
+
+      // Fetch customer details using the customerid
+      fetchCustomerDetails(customerid);
+    }
+  }, [location]);
+
   const handleProfileClick = () => {
     // Navigate to the UserProfile component
-    Navigate("/profile");
+    // Assuming UserProfile component exists
+    navigate("/profile"); // Corrected from 'Navigate'
   };
-  //   const handleAddClick = () => {
-  //     // Navigate to the UserProfile component
-  //     Navigate("/addproduct");
-  //   };
   return (
     <div className="w-full h-[80px] bg-white border-b">
       {/* navbar for wide screens */}
@@ -67,7 +99,7 @@ const Navbar = ({ loggedInCustomer }) => {
           {loggedInCustomer ? (
             // Display the customer's name and SvgIcon if logged in
             <>
-              <p className="font-bold mr-2">{`${loggedInCustomer.customerName}`}</p>
+              <p className="font-bold mr-2">{`${loggedInCustomer.name}`}</p>
               <FontAwesomeIcon
                 icon={["far", "user"]}
                 className="mr-1"
@@ -144,5 +176,4 @@ const Navbar = ({ loggedInCustomer }) => {
     </div>
   );
 };
-
 export default Navbar;

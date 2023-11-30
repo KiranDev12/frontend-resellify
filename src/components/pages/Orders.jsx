@@ -6,21 +6,21 @@ const Orders = () => {
     {
       orderId: "OD123",
       product: "Laptop",
-      quantity: 2,
+      merchantId: 2,
       total: "$2000",
       status: "Shipped",
     },
     {
       orderId: "OD124",
       product: "Smartphone",
-      quantity: 1,
+      merchantId: 1,
       total: "$800",
       status: "Processing",
     },
     {
       orderId: "OD125",
       product: "Headphones",
-      quantity: 3,
+      merchantId: 3,
       total: "$150",
       status: "Delivered",
     },
@@ -38,7 +38,7 @@ const Orders = () => {
             <tr className="bg-[#20B486] text-white">
               <th className="py-3 px-4 border-b">Order ID</th>
               <th className="py-3 px-4 border-b">Product</th>
-              <th className="py-3 px-4 border-b">Quantity</th>
+              <th className="py-3 px-4 border-b">Merchant</th>
               <th className="py-3 px-4 border-b">Total</th>
               <th className="py-3 px-4 border-b">Status</th>
             </tr>
@@ -46,14 +46,22 @@ const Orders = () => {
           <tbody>
             {ordersData.map((order) => (
               <tr key={order.orderId}>
-                <td className="py-2 px-4 border-b">{order.orderId}</td>
-                <td className="py-2 px-4 border-b">{order.product}</td>
-                <td className="py-2 px-4 border-b">{order.quantity}</td>
-                <td className="py-2 px-4 border-b">{order.total}</td>
+                <td className="py-2 px-4 border-b text-center">
+                  {order.orderId}
+                </td>
+                <td className="py-2 px-4 border-b text-center">
+                  {order.product}
+                </td>
+                <td className="py-2 px-4 border-b text-center">
+                  {order.merchantId}
+                </td>
+                <td className="py-2 px-4 border-b text-center">
+                  {order.total}
+                </td>
                 <td
                   className={`py-2 px-4 border-b ${getStatusColor(
                     order.status
-                  )}`}
+                  )} text-center`}
                 >
                   {order.status}
                 </td>
@@ -66,7 +74,6 @@ const Orders = () => {
   );
 };
 
-// Helper function to determine status color
 const getStatusColor = (status) => {
   switch (status) {
     case "Shipped":

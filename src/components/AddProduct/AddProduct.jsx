@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 const AddProduct = () => {
   const [productData, setProductData] = useState({
     product_name: "",
@@ -20,12 +19,23 @@ const AddProduct = () => {
       [name]: value,
     });
   };
+  const convertImageToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = btoa(
+          String.fromCharCode.apply(null, new Uint8Array(reader.result))
+        );
+        resolve(base64String);
+      };
+      reader.onerror = reject;
+      reader.readAsArrayBuffer(file);
+    });
+  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Convert the selected image to a byte array (you may need a separate function for this)
-      // For simplicity, let's assume there is a function named `convertImageToByteArray`.
       convertImageToByteArray(file).then((byteArray) => {
         setProductData({
           ...productData,
@@ -35,9 +45,17 @@ const AddProduct = () => {
     }
   };
 
+  const handlePriceChange = (e) => {
+    const { name, value } = e.target;
+    setProductData({
+      ...productData,
+      [name]: value,
+    });
+  };
+
   const handleSubmit = () => {
     // Make a POST request to the server API endpoint with productData
-    fetch("http://your-api-endpoint/addProduct", {
+    fetch("http://127.0.0.1:8080/receive/addproduct/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,15 +98,28 @@ const AddProduct = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-600">Product Date</label>
+          <label className="block text-gray-600">Product Life</label>
           <input
-            type="date"
-            name="product_date"
-            value={productData.product_date}
+            type="How old is your product?"
+            name="product_life"
+            value={productData.product_life}
             onChange={handleInputChange}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-600">Product Price</label>
+          <input
+            placeholder="Price in rupees"
+            type="text"
+            name="product_price"
+            value={productData.product_price}
+            onChange={handlePriceChange} // Use handlePriceChange for price changes
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+          />
+        </div>
+
         {/* Add styling for other input fields */}
 
         <div className="mb-4">

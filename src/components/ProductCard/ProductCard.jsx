@@ -77,13 +77,14 @@ function ProductCard() {
                       </p>
                     </div>
                   </div>
-
-                  <Link
-                  className="text-sm text-gray-700"
-                    to={`/products/${product.product_id}`}
-                  >
-                    See More
-                  </Link>
+                  <div className="seemore hover:underline">
+                    <Link
+                      className="text-sm text-gray-700"
+                      to={`/products/${product.product_id}`}
+                    >
+                      See More
+                    </Link>
+                  </div>
                 </div>
               </SwiperSlide>
             ))}

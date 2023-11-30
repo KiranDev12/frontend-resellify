@@ -1,43 +1,51 @@
-// ProductDetailPage.jsx
-
 import React from "react";
-import { FaStar } from "react-icons/fa";
+import login from "../../assets/login-img.jpg";
+import './ProductDetailPage.css'
+function ProductDetailPage() {
+  const productDetails = {
+    product_id: 4134,
+    product_name: "Classic Denim Jeans",
+    product_desc:
+      "Premium over-ear headphones with noise-cancelling technology and exceptional audio quality",
+    product_date: "2020-05-12",
+    product_rating: 4.7,
+    product_life: 2,
+    product_price: 2800,
+    product_img: null,
+    merchant_id: 2620,
+    category_id: 3515,
+    category_name: "Clothing",
+  };
 
-const ProductDetailPage = ({ product }) => {
   return (
-    <div className="product-detail-page">
-      <img src={product.product_img} alt={product.product_name} />
-      <h2 className="product-name">{product.product_name}</h2>
-      <p className="product-desc">{product.product_desc}</p>
-      <div className={`category-name category-${product.category_id % 7}`}>
-        {product.category_name}
+    <div className="flex flex-row w-full h-max justify-around">
+      <div className="left mt-10">
+        <img src={login} alt="Product" className="h-auto max-w-md rounded-lg" />
       </div>
-      <div className="price-rating-container">
-        <div className="price-container">
-          <span className="black font-thin text-sm r-price">
-            <span style={{ color: "black" }} className="pr-1">
-              $
-            </span>
-            {product.product_price}
-          </span>
+      <div className="right p-4 mt-10">
+        <h2 className="text-5xl font-bold mb-4">
+          {productDetails.product_name}
+        </h2>
+        <p className="text-xl text-gray-600 mb-4">{productDetails.product_desc}</p>
+        <div className={`category-name`}>
+          {productDetails.category_name}
         </div>
-        <div className="rating-container">
-          <p className="secondaryText rating-container">
-            <FaStar
-              className="starIcon text-yellow-500"
-              style={{ WebkitTextStroke: "1px black" }}
-            />
-            <span className="black">{product.product_rating}</span>
-          </p>
-        </div>
+        <p className="text-gray-600 mb-4">
+          Rating: {productDetails.product_rating}
+        </p>
+        <p className="text-gray-600 mb-4">
+          Price: Rs {productDetails.product_price}
+        </p>
+        <p className="text-gray-600 mb-4">
+          Life: {productDetails.product_life} years
+        </p>
+        <p className="text-gray-600 mb-4">
+          Release Date: {productDetails.product_date}
+        </p>
+        {/* Add more details as needed */}
       </div>
-      <p className="product-date">Product Date: {product.product_date}</p>
-      <p className="product-life">Product Life: {product.product_life} years</p>
-      <p className="merchant-id">Merchant ID: {product.merchant_id}</p>
-      {/* Add more details as needed */}
-      <button className="buyNowButton">Buy Now</button>
     </div>
   );
-};
+}
 
 export default ProductDetailPage;
