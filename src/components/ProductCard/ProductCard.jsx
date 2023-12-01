@@ -26,7 +26,6 @@ function ProductCard() {
         setLoading(false);
       });
   }, []);
-
   return (
     <section className="r-wrapper">
       <div className="paddings  innerWidth r-container">
@@ -44,7 +43,7 @@ function ProductCard() {
                 <div className={`flexColStart r-card flex-column`}>
                   <img
                     className="mb-2"
-                    src={login}
+                    src={product.product_img}  // Use the updated image URL
                     alt={product.product_name}
                   />
                   <span className="product-name text-gray-800">

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const AddProduct = () => {
   const [productData, setProductData] = useState({
     product_name: "",
@@ -8,7 +7,7 @@ const AddProduct = () => {
     product_rating: 0,
     product_life: 0,
     product_price: 0,
-    product_img: null,
+    product_img: "",
     category_name: "Clothing",
   });
 
@@ -23,21 +22,23 @@ const AddProduct = () => {
   const convertImageToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = btoa(
-          String.fromCharCode.apply(null, new Uint8Array(reader.result))
-        );
-        resolve(base64String);
+      reader.onload = () => {
+        resolve(reader.result);
       };
+
       reader.onerror = reject;
-      reader.readAsArrayBuffer(file);
+
+      reader.readAsDataURL(file);
     });
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+    console.log(file);
     if (file) {
       convertImageToBase64(file).then((base64String) => {
+        console.log(base64String.length)
+        
         setProductData({
           ...productData,
           product_img: base64String,
@@ -53,8 +54,15 @@ const AddProduct = () => {
       [name]: value,
     });
   };
-  console.log(productData);
+
   const handleSubmit = () => {
+    // Validate that product_img is not null
+    if (!productData.product_img) {
+      console.error("Product image is required.");
+      // Handle this case, e.g., show an error message
+      return;
+    }
+
     // Make a POST request to the server API endpoint with productData
     fetch("http://127.0.0.1:8080/receive/addproduct/", {
       method: "POST",
