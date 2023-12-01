@@ -32,6 +32,9 @@ function ProductDetailPage() {
         <h2 className="text-3xl md:text-5xl font-bold mb-4">
           {productDetails.product_name}
         </h2>
+        <span className="product-name text-gray-800">
+          <Strong>Product Id</Strong>: {productDetails.product_id}
+        </span>
         <p className="text-lg text-gray-600 mb-4">
           {productDetails.product_desc}
         </p>

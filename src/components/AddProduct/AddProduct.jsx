@@ -19,6 +19,7 @@ const AddProduct = () => {
       [name]: value,
     });
   };
+
   const convertImageToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -36,10 +37,10 @@ const AddProduct = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      convertImageToByteArray(file).then((byteArray) => {
+      convertImageToBase64(file).then((base64String) => {
         setProductData({
           ...productData,
-          product_img: byteArray,
+          product_img: base64String,
         });
       });
     }
@@ -52,7 +53,7 @@ const AddProduct = () => {
       [name]: value,
     });
   };
-
+  console.log(productData);
   const handleSubmit = () => {
     // Make a POST request to the server API endpoint with productData
     fetch("http://127.0.0.1:8080/receive/addproduct/", {
@@ -100,14 +101,23 @@ const AddProduct = () => {
         <div className="mb-4">
           <label className="block text-gray-600">Product Life</label>
           <input
-            type="How old is your product?"
+            type="text"
             name="product_life"
             value={productData.product_life}
             onChange={handleInputChange}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
-
+        <div className="mb-4">
+          <label className="block text-gray-600">Product Date</label>
+          <input
+            type="date"
+            name="product_date"
+            value={productData.product_date}
+            onChange={handleInputChange}
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+          />
+        </div>
         <div className="mb-4">
           <label className="block text-gray-600">Product Price</label>
           <input
