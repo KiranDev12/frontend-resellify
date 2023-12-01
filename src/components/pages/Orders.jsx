@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 const Orders = () => {
-  // Dummy data for demonstration
-  const { ordersData, setOrdersData } = useState([]);
+  const [ordersData, setOrdersData] = useState([]);
   const location = useLocation();
-  const storedUser = localStorage.getItem("user");
+  const storedUser = JSON.parse(localStorage.getItem("user"));
   console.log(storedUser);
-
+  const customerid = storedUser.customerid; // Assuming the property name is "customerid"
+  const status = "Shipped";
   const fetchOrders = async (customerId) => {
-    // console.log("Signup clicked");
-    // console.log("Form Data:", formData);
-
-    fetch("http://127.0.0.1:8080/receive/corders/", {
+    fetch("http://127.0.0.1:8000/receive/corders/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(customerId),
+      body: JSON.stringify({ customerid: customerId }), // Assuming your API expects an object with a property "customerid"
     })
       .then((response) => response.json())
       .then((data) => {
@@ -27,7 +24,13 @@ const Orders = () => {
         console.error("Error sending signup request:", error);
         // Handle error
       });
+    console.log(ordersData);
   };
+
+  useEffect(() => {
+    // Fetch orders when the component mounts
+    fetchOrders(customerid);
+  }, [customerid]);
   return (
     <div className="container mx-auto mt-8 p-8">
       <h2 className="text-4xl font-extrabold mb-8 text-[#20B486]">
@@ -48,23 +51,23 @@ const Orders = () => {
             {ordersData.map((order) => (
               <tr key={order.orderId}>
                 <td className="py-2 px-4 border-b text-center">
-                  {order.orderId}
+                  {order.orderid}
                 </td>
                 <td className="py-2 px-4 border-b text-center">
-                  {order.product}
+                  {order.productName}
                 </td>
                 <td className="py-2 px-4 border-b text-center">
-                  {order.merchantId}
+                  {order.merchantid}
                 </td>
                 <td className="py-2 px-4 border-b text-center">
-                  {order.total}
+                  {order.productPrice}
                 </td>
                 <td
                   className={`py-2 px-4 border-b ${getStatusColor(
-                    order.status
+                    status
                   )} text-center`}
                 >
-                  {order.status}
+                  {status}
                 </td>
               </tr>
             ))}

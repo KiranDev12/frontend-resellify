@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Issues = () => {
   const [productId, setProductId] = useState("");
   const [issueDesc, setIssueDesc] = useState("");
   const [submittedIssues, setSubmittedIssues] = useState([]);
 
-  fetch("http://127.0.0.1:8000/fetch/issues/")
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  useEffect(() => {
+    // Fetch existing issues when the component mounts
+    fetch("http://127.0.0.1:8000/fetch/issues/")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // Update your state with the fetched issues
+        setSubmittedIssues(data.issues || []);
+      })
+      .catch((error) => {
+        console.error("Error fetching existing issues:", error);
+      });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,17 +28,71 @@ const Issues = () => {
       return;
     }
 
-    // Add the new issue to the list
+    // Create a new issue object
     const newIssue = {
       productId: productId,
       issueDesc: issueDesc,
     };
 
-    setSubmittedIssues([newIssue, ...submittedIssues]);
+    // Make a POST request to the backend to raise the issue
+    fetch("http://127.0.0.1:8000/receive/raiseissue/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newIssue),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // If the issue is raised successfully, update the submitted issues list
+        setSubmittedIssues([newIssue, ...submittedIssues]);
+      })
+      .catch((error) => {
+        console.error("Error raising issue:", error);
+      });
 
     // Clear form fields
     setProductId("");
     setIssueDesc("");
+  };
+
+  const LoginUserView = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [user, setUser] = useState(null);
+
+    const handleLogin = () => {
+      // Your existing login logic here
+
+      // After successful login, fetch user's issues
+      fetch("http://127.0.0.1:8000/user/issues/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customerid: user?.customerid,
+          merchantid: user?.merchantid,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          // Update your state or do something with the fetched issues
+          setSubmittedIssues(data.issues || []);
+        })
+        .catch((error) => {
+          console.error("Error fetching user issues:", error);
+        });
+    };
+
+    return (
+      <div>
+        {/* Your login component JSX here */}
+        <button onClick={handleLogin}>Login</button>
+      </div>
+    );
   };
 
   return (
@@ -45,48 +102,13 @@ const Issues = () => {
         <div>
           <h2 className="text-3xl font-bold mb-6">Submit an Issue</h2>
           <form onSubmit={handleSubmit} className="max-w-md">
-            <div className="mb-4">
-              <label
-                htmlFor="productId"
-                className="block text-sm font-medium text-gray-600"
-              >
-                Product ID
-              </label>
-              <input
-                type="text"
-                id="productId"
-                name="productId"
-                value={productId}
-                onChange={(e) => setProductId(e.target.value)}
-                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="issueDesc"
-                className="block text-sm font-medium text-gray-600"
-              >
-                Issue Description
-              </label>
-              <textarea
-                id="issueDesc"
-                name="issueDesc"
-                value={issueDesc}
-                onChange={(e) => setIssueDesc(e.target.value)}
-                rows="4"
-                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-                required
-              ></textarea>
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="bg-[#20B486] text-white px-4 py-2 rounded-md font-bold"
-              >
-                Submit Issue
-              </button>
-            </div>
+            {/* ... (your form input fields) */}
+            <button
+              type="submit"
+              className="bg-[#20B486] text-white px-4 py-2 rounded-md font-bold"
+            >
+              Submit Issue
+            </button>
           </form>
         </div>
 
