@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.css";
-
+import logo from "../../assets/logo-withoutbg.png";
 const Footer = () => {
   return (
     <footer className="footer bg-gray-800 text-white">
@@ -16,6 +16,7 @@ const Footer = () => {
           {/* Follow Us */}
           <div>
             <h4 className="text-lg font-semibold mb-2">Follow Us</h4>
+            
             <div className="flex space-x-4">
               <a href="#" target="_blank" rel="noopener noreferrer">
                 Facebook

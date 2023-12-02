@@ -26,7 +26,7 @@ function Signin(props) {
 
     try {
       // Send a POST request to the server for authentication
-      const response = await fetch("http://127.0.0.1:8080/receive/login/", {
+      const response = await fetch("http://127.0.0.1:8000/receive/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,19 +35,22 @@ function Signin(props) {
       });
 
       if (!response.ok) {
-        // Authentication failed, show an error message
         toast.error("Invalid Credentials");
         return;
       }
 
-      // Authentication successful, you can redirect or perform other actions
-      const user = await response.json();
-      console.log(user);
+      // Authentication successful, parse the response data
+      const responseData = await response.json();
 
-      // Save user information to local storage
-      localStorage.setItem("user", JSON.stringify(user));
-
-      props.onLogin(user);
+      if (responseData.authenticated === false) {
+        toast.error("No such account exists ... ");
+        return;
+      }
+      console.log(responseData);
+      localStorage.clear; 
+      localStorage.setItem("user", JSON.stringify(responseData));
+      console.log(localStorage.getItem("user"));
+      props.onLogin(responseData);
       toast.success("Successful login");
       navigate("/");
     } catch (error) {

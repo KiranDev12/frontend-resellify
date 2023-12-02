@@ -33,7 +33,7 @@ function ProductDetailPage() {
           {productDetails.product_name}
         </h2>
         <span className="product-name text-gray-800">
-          <Strong>Product Id</Strong>: {productDetails.product_id}
+          Product Id: {productDetails.product_id}
         </span>
         <p className="text-lg text-gray-600 mb-4">
           {productDetails.product_desc}
@@ -41,7 +41,7 @@ function ProductDetailPage() {
         <div className="text-gray-700 font-semibold mb-4">
           Category: {productDetails.category_name}
         </div>
-        <p className="text-gray-700 mb-4">
+        <p className="text-gray-700 strmb-4">
           Rating: {productDetails.product_rating}
         </p>
         <p className="text-gray-700 mb-4">

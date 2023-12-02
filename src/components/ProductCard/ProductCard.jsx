@@ -15,7 +15,7 @@ function ProductCard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8080/fetch/products/")
+    fetch("http://127.0.0.1:8000/fetch/products/")
       .then((response) => response.json())
       .then((data) => {
         setData(data);
@@ -43,7 +43,7 @@ function ProductCard() {
                 <div className={`flexColStart r-card flex-column`}>
                   <img
                     className="mb-2"
-                    src={product.product_img}  // Use the updated image URL
+                    src={product.product_img} // Use the updated image URL
                     alt={product.product_name}
                   />
                   <span className="product-name text-gray-800">

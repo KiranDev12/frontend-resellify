@@ -8,7 +8,7 @@ const Orders = () => {
   const customerid = storedUser.customerid; // Assuming the property name is "customerid"
   const status = "Shipped";
   const fetchOrders = async (customerId) => {
-    fetch("http://127.0.0.1:8080/receive/corders/", {
+    fetch("http://127.0.0.1:8000/receive/corders/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

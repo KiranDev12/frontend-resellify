@@ -15,7 +15,7 @@ const Issues = () => {
 
   const fetchUserIssues = () => {
     if (user && user.customerid) {
-      fetch("http://127.0.0.1:8080/receive/getissues/", {
+      fetch("http://127.0.0.1:8000/receive/getissues/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const Issues = () => {
     };
 
     // Make a POST request to the backend to raise the issue
-    fetch("http://127.0.0.1:8080/receive/raiseissue/", {
+    fetch("http://127.0.0.1:8000/receive/raiseissue/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -86,7 +86,10 @@ const Issues = () => {
           <h2 className="text-3xl font-bold mb-6">Submit an Issue</h2>
           <form onSubmit={handleSubmit} className="max-w-md">
             <div className="mb-4">
-              <label htmlFor="productId" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="productId"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Product ID
               </label>
               <input
@@ -101,7 +104,10 @@ const Issues = () => {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="issueDesc" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="issueDesc"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Issue Description
               </label>
               <textarea

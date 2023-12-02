@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 const AddProduct = () => {
   const [productData, setProductData] = useState({
     product_name: "",
@@ -8,9 +9,23 @@ const AddProduct = () => {
     product_life: 0,
     product_price: 0,
     product_img: "",
+    merchant_id: "",
     category_name: "Clothing",
   });
+  useEffect(() => {
+    // Check if user information is stored in local storage
+    const storedUser = localStorage.getItem("user");
 
+    if (storedUser) {
+      const userObject = JSON.parse(storedUser);
+      const { merchantid } = userObject;
+      const merchant_id = merchantid;
+      setProductData({
+        ...productData,
+        merchant_id,
+      });
+    }
+  }, []);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProductData({
@@ -37,8 +52,8 @@ const AddProduct = () => {
     console.log(file);
     if (file) {
       convertImageToBase64(file).then((base64String) => {
-        console.log(base64String.length)
-        
+        console.log(base64String.length);
+
         setProductData({
           ...productData,
           product_img: base64String,
@@ -56,6 +71,7 @@ const AddProduct = () => {
   };
 
   const handleSubmit = () => {
+    console.log(productData);
     // Validate that product_img is not null
     if (!productData.product_img) {
       console.error("Product image is required.");
@@ -64,7 +80,7 @@ const AddProduct = () => {
     }
 
     // Make a POST request to the server API endpoint with productData
-    fetch("http://127.0.0.1:8080/receive/addproduct/", {
+    fetch("http://127.0.0.1:8000/receive/addproduct/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -9,7 +9,7 @@ import CompleteTransactionImage from "../../assets/lending.png";
 
 const HowItWorks = () => {
   return (
-    <div className="bg-gray-100 innerWidth py-12">
+    <div className="bg-gray-100 py-12">
       <div className="container mx-auto text-center">
         <h2 className="text-4xl font-extrabold mb-8 text-[#20B486]">
           How It Works

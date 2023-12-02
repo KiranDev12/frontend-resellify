@@ -108,7 +108,7 @@ a {
   transform: scale(1.1);
 }
 /* media queries */
-@media (min-width: 1536px) {
+@media (min-width: 0px) {
   .innerWidth {
     max-width: 1280px;
     margin: auto;

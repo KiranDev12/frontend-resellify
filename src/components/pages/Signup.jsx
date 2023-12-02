@@ -25,14 +25,14 @@ function Signup() {
     setFormData({
       ...formData,
       isMerchant: !formData.isMerchant,
-    });                   
+    });
   };
 
   const handleSignup = () => {
     console.log("Signup clicked");
     console.log("Form Data:", formData);
 
-    fetch("http://127.0.0.1:8080/receive/register/  ", {
+    fetch("http://127.0.0.1:8000/receive/register/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,12 +42,20 @@ function Signup() {
       .then((response) => response.json())
       .then((data) => {
         console.log("API Response:", data);
-        // Handle success or error response from the API
-        // For example, redirect to login page on successful signup
+
+        if (data.authenticated) {
+          // Signup successful, show success message
+          toast.success("Signup successful");
+          // You can redirect to the login page or perform other actions on successful signup
+        } else {
+          // Signup failed, show an error message
+          toast.error("Signup failed. Please check your information.");
+        }
       })
       .catch((error) => {
         console.error("Error sending signup request:", error);
         // Handle error
+        toast.error("An error occurred during signup");
       });
   };
 
