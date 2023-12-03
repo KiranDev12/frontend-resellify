@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import hero from "../../assets/hero.jpg";
+import welcome from "../../assets/5098293.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -70,7 +70,7 @@ function Signin(props) {
       <div className="grid grid-cols-1 sm:grid-cols-2 w-full max-w-screen-xl">
         {/* Hide the image on screens with a width of 864 pixels and below */}
         <div className="hidden sm:block">
-          <img className="max-h-full object-cover" src={hero} alt="" />
+          <img className="max-h-full object-cover" src={welcome} alt="" />
         </div>
         <div className="flex items-center justify-center">
           {/* Sign In Form */}

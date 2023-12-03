@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import hero from "../../assets/hero.jpg";
+import signup from "../../assets/Mobile-login.jpg";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -63,7 +63,7 @@ function Signup() {
     <div className="flex items-center justify-center bg-white h-screen overflow-hidden">
       <div className="grid grid-cols-1 sm:grid-cols-2 w-full max-w-screen-xl">
         <div className="hidden sm:block">
-          <img className="max-h-full object-cover" src={hero} alt="" />
+          <img className="max-h-full object-cover" src={signup} alt="" />
         </div>
         <div className="flex items-center justify-center">
           <form className="max-w-[400px] w-full bg-gray-900 p-8 px-8 rounded-lg">

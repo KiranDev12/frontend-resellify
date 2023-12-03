@@ -1,8 +1,15 @@
 .review-container {
+  display: flex;
+  flex-direction: column;
+  
+  width: 300px;
     text-align: center;
     margin: 20px;
   }
-  
+  .review-main {
+    display: flex;
+    justify-content: space-around;
+  }
   .stars {
     font-size: 36px;
   }
