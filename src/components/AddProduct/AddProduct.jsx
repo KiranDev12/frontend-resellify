@@ -165,7 +165,17 @@ const AddProduct = () => {
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           >
             <option value="Clothing">Clothing</option>
-            {/* Add other category options as needed */}
+            <option value="Beauty & Personal Care">
+              Beauty & Personal Care
+            </option>
+            <option value="Jewelry">Jewelry</option>
+            <option value="Health & Wellness">Health & Wellness</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Home & Kitchen">Home & Kitchen</option>
+            <option value="Sports & Outdoors">Sports & Outdoors</option>
+            <option value="Books">Books</option>
+            <option value="Toys & Games">Toys & Games</option>
           </select>
         </div>
         <div className="mb-4">

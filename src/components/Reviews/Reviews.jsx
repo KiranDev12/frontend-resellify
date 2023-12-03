@@ -1,24 +1,29 @@
 import React, { useState } from "react";
 import "./Review.css";
 
-const Review = ({ customerId, merchantId }) => {
+const Review = () => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
+  const user = localStorage.getItem("user");
 
+  var storedUserObject = JSON.parse(user);
+  const { customerid } = storedUserObject;
+  const productId = window.location.pathname.split("/").pop();
   const handleStarClick = (selectedRating) => {
     setRating(selectedRating);
   };
 
   const handleSubmitReview = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/fetch/products/", {
+      const response = await fetch("http://127.0.0.1:8000/receive/reviews/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           rating: rating,
-          customerId: customerId, // or merchantId, depending on the scenario
+          customerid: customerid,
+          productid: productId // or merchantId, depending on the scenario
         }),
       });
 

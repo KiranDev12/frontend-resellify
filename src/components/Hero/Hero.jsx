@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CountUp from "react-countup";
-import hero from "../../assets/hero.jpg";
+import hero from "../../assets/7473712.jpg";
 import { AiOutlineSearch } from "react-icons/ai";
 
 const Hero = () => {
@@ -24,9 +24,9 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-full innerWidth bg-white pt-14">
+    <div className="flex flex-col w-full innerWidth bg-white">
       <div className="md:max-w-[1480px] m-auto grid md:grid-cols-2 max-w-[600px]  px-4 md:px-0">
-        <div className="flex flex-col justify-start gap-4">
+        <div className="flex flex-col justify-center gap-4">
           <p className="py-2 text-2xl text-[#20B486] font-medium">
             Revolutionize Reselling
           </p>
@@ -60,8 +60,7 @@ const Hero = () => {
             </button>
           </form>
         </div>
-
-        <img src={hero} className="hero-img md:order-last  order-first" />
+        <img src={hero} className="md:order-last  order-first" />
       </div>
       <div className="arrow-button mt-20 mb-10 self-center">
         <svg

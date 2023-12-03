@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import hero from "../../assets/hero.jpg"; // Import your custom image
-import logo from "../../assets/resellify-logo (1).jpeg"
+import logo from "../../assets/resellify-logo (1).jpeg";
 const AboutUs = () => {
   return (
-    <div className="grid grid-flow-col grid-cols-2 container mx-auto mt-16 p-8 text-center">
+    <div className="grid innerWidth grid-flow-col grid-cols-2 container mx-auto p-8 text-center">
       <div>
         <img src={logo} alt="Resellify Logo" className="h-auto mx-auto mb-8" />
       </div>

@@ -42,7 +42,7 @@ const Navbar = () => {
           <ul className="flex gap-4">
             <li className="font-bold transition duration-150 border-b-8 border-transparent hover:border-purple-500">
               <NavLink to="/products">Products</NavLink>
-            </li>
+            </li> 
             <li className="font-bold transition duration-150 border-b-8 border-transparent hover:border-purple-500">
               <NavLink to="/orders">Orders</NavLink>
             </li>
@@ -75,7 +75,7 @@ const Navbar = () => {
                 </div>
 
                 <div
-                  className="px-4 py-2 rounded-md bg-red-600 text-white font-bold"
+                  className="px-4 py-2 mr-2 rounded-md bg-red-600 text-white font-bold"
                   onClick={handleLogoutClick}
                 >
                   Logout
