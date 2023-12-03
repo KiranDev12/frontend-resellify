@@ -46,10 +46,8 @@ function Signin(props) {
         toast.error("No such account exists ... ");
         return;
       }
-      console.log(responseData);
-      localStorage.clear; 
+      localStorage.clear(); // Corrected line
       localStorage.setItem("user", JSON.stringify(responseData));
-      console.log(localStorage.getItem("user"));
       props.onLogin(responseData);
       toast.success("Successful login");
       navigate("/");

@@ -14,7 +14,7 @@ const Issues = () => {
   }, []);
 
   const fetchUserIssues = () => {
-    if (user && user.customerid) {
+    if (user) {
       fetch("http://127.0.0.1:8000/receive/getissues/", {
         method: "POST",
         headers: {
@@ -22,6 +22,7 @@ const Issues = () => {
         },
         body: JSON.stringify({
           customerid: user.customerid,
+          merchantid: user.merchantid,
         }),
       })
         .then((response) => response.json())
