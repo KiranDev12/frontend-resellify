@@ -28,6 +28,26 @@ function ProductDetailPage() {
     productid: productId,
   };
   console.log(formData);
+  const similarProductsSend = {
+    productid: productId,
+  };
+
+  //MODEL DATA ENDPOINT
+  const similarProducts = fetch("endpoint", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(similarProductsSend),
+  });
+
+  console.log(similarProducts);
+  // {
+  //   {productid, productname, categoryid},
+  //   {productid, productname, categoryid},
+  //   {productid, productname, categoryid},
+  // }
+
   const handleBuyNow = async (e) => {
     e.preventDefault();
 
